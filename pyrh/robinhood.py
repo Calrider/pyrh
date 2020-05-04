@@ -1038,13 +1038,6 @@ class Robinhood(InstrumentManager, SessionManager):
                         "Stop order has no stop_price in call to submit_sell_order"
                     )
                 )
-            if price <= 0:
-                raise (
-                    ValueError(
-                        "Stop_price must be positive number in call to "
-                        "submit_sell_order"
-                    )
-                )
 
         if stop_price is not None:
             if trigger != "stop":
