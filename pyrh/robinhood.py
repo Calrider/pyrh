@@ -1010,11 +1010,13 @@ class Robinhood(InstrumentManager, SessionManager):
                     order_type = "limit"
 
         symbol = str(symbol).upper().strip()
-        instrument_URL = self.instrument(symbol).url
+        instrument_URL = self.quote_data(symbol)["instrument"]
         order_type = str(order_type).lower()
         time_in_force = str(time_in_force).lower()
         trigger = str(trigger).lower()
         side = str(side).lower()
+
+        print('URL: ' + instrument_URL)
 
         if (order_type != "market") and (order_type != "limit"):
             raise (ValueError("Invalid order_type in call to submit_sell_order"))
