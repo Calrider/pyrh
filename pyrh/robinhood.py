@@ -992,9 +992,9 @@ class Robinhood(InstrumentManager, SessionManager):
             current_bid_price = current_quote["bid_price"]
 
         # Start with some parameter checks. I'm paranoid about $.
-        if instrument_URL is None and symbol is None:
+        if symbol is None:
             raise (
-                ValueError("Neither instrument_URL nor symbol were passed to submit_sell_order")
+                ValueError("Parameter 'symbol' is required in call to submit_sell_order")
             )
 
         if side is None:
@@ -1009,7 +1009,8 @@ class Robinhood(InstrumentManager, SessionManager):
                 else:
                     order_type = "limit"
 
-        symbol = str(symbol).upper()
+        symbol = str(symbol).upper().trim()
+        instrument_URL = self.instrument(symbol).url
         order_type = str(order_type).lower()
         time_in_force = str(time_in_force).lower()
         trigger = str(trigger).lower()
