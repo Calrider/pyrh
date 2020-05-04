@@ -992,18 +992,10 @@ class Robinhood(InstrumentManager, SessionManager):
             current_bid_price = current_quote["bid_price"]
 
         # Start with some parameter checks. I'm paranoid about $.
-        if instrument_URL is None:
-            if symbol is None:
-                raise (
-                    ValueError(
-                        "Neither instrument_URL nor symbol were passed to "
-                        "submit_sell_order"
-                    )
-                )
-            raise (ValueError("Instrument_URL not passed to submit_sell_order"))
-
-        if symbol is None:
-            raise (ValueError("Symbol not passed to submit_sell_order"))
+        if instrument_URL is None and symbol is None:
+            raise (
+                ValueError("Neither instrument_URL nor symbol were passed to submit_sell_order")
+            )
 
         if side is None:
             raise (
